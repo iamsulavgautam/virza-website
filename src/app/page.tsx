@@ -1,3 +1,10 @@
+import Navbar from "@/sections/Navbar";
+
 export default function Home() {
-    return <div>Hello Virza</div>;
-}
+    return(
+        <>
+            <Navbar />
+        </>
+        );
+    }
+
