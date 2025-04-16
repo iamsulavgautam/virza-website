@@ -1,26 +1,21 @@
 "use client";
 
-import quantumLogo from "@/assets/images/quantum.svg";
+import vingreli from "@/assets/images/vingreli.svg";
 import acmeLogo from "@/assets/images/acme-corp.svg";
 import echoValleyLogo from "@/assets/images/echo-valley.svg";
-import pulseLogo from "@/assets/images/pulse.svg";
-import outsideLogo from "@/assets/images/outside.svg";
-import apexLogo from "@/assets/images/apex.svg";
-import celestialLogo from "@/assets/images/celestial.svg";
-import twiceLogo from "@/assets/images/twice.svg";
+import realradisson from "@/assets/images/realradisson.svg";
+import gurukulyatra from "@/assets/images/gurukulYatra.svg";
+import gurukul from "@/assets/images/gurukul.svg";
+import hwepc from "@/assets/images/hwepc.svg";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import React from "react";
 
 const logos = [
-  { name: "Quantum", image: quantumLogo },
-  { name: "Acme Corp", image: acmeLogo },
-  { name: "Echo Valley", image: echoValleyLogo },
-  { name: "Pulse", image: pulseLogo },
-  { name: "Outside", image: outsideLogo },
-  { name: "Apex", image: apexLogo },
-  { name: "Celestial", image: celestialLogo },
-  { name: "Twice", image: twiceLogo },
+  { name: "Gurukul", image: gurukul },
+  { name: "Vingreli", image: vingreli },
+  { name: "hwepc", image: hwepc },
+  { name: "Gurukul Yatra", image: gurukulyatra },
 ];
 
 export default function LogoTicker() {
@@ -28,7 +23,7 @@ export default function LogoTicker() {
     <section className="py-24 overflow-x-clip">
       <div className="container">
         <h3 className="text-center text-white/50 text-xl">
-          Already chosen by these market leaders
+          Showcasing Our Latest Builds
         </h3>
         <div className="flex overflow-hidden mt-12 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <motion.div

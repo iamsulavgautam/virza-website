@@ -12,11 +12,7 @@ const integrations = [
     icon: uiIcon,
     description: "Design your app and websites",
   },
-  // {
-  //   name: "Notion",
-  //   icon: notionIcon,
-  //   description: "Notion is an all-in-one workspace for notes and docs.",
-  // },
+
   {
     name: "App Dev",
     icon: appDev,

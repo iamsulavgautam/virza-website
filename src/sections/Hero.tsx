@@ -139,7 +139,7 @@ export default function Hero() {
             type="submit"
             variant="primary"
           >
-            Sign Up
+            Connect
           </Button>
         </form>
       </div>

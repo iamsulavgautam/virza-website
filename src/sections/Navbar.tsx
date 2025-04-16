@@ -1,7 +1,9 @@
 "use client";
+
 import Image from "next/image";
 import logoImage from "@/assets/images/logo.svg";
 import Button from "@/components/button";
+import PopupForm from "@/components/PopupForm"; // 👈 import your popup
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { AnimatePresence, motion } from "framer-motion";
@@ -15,6 +17,10 @@ const navLinks = [
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showPopup, setShowPopup] = useState(false); // 👈 control popup
+
+  const togglePopup = () => setShowPopup(!showPopup);
+
   return (
     <>
       <section className="py-4 lg:py-8 fixed w-full top-0 z-50">
@@ -38,6 +44,7 @@ export default function Navbar() {
                 </nav>
               </div>
               <div className="flex justify-end gap-4">
+                {/* Mobile menu button */}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -51,7 +58,6 @@ export default function Navbar() {
                   className="feather feather-menu md:hidden"
                   onClick={() => setIsOpen(!isOpen)}
                 >
-                  {" "}
                   <line
                     x1="3"
                     y1="6"
@@ -81,14 +87,18 @@ export default function Navbar() {
                   ></line>
                 </svg>
 
+                {/* Contact Us Button */}
                 <Button
                   variant="primary"
                   className="hidden md:inline-flex items-center text-black border border-transparent hover:border-lime-400 hover:bg-transparent hover:text-white"
+                  onClick={togglePopup}
                 >
                   Contact Us!
                 </Button>
               </div>
             </div>
+
+            {/* Mobile Dropdown Menu */}
             <AnimatePresence>
               {isOpen && (
                 <motion.div
@@ -98,13 +108,12 @@ export default function Navbar() {
                   className=" overflow-hidden"
                 >
                   <div className="flex flex-col items-center gap-4 py-4">
-                    {" "}
                     {navLinks.map((link) => (
                       <a href={link.href} key={link.label} className="">
                         {link.label}
                       </a>
                     ))}
-                    <Button variant="primary" className="">
+                    <Button variant="primary" onClick={togglePopup}>
                       Contact Us!
                     </Button>
                   </div>
@@ -114,7 +123,23 @@ export default function Navbar() {
           </div>
         </div>
       </section>
+
+      {/* Bottom padding for fixed navbar */}
       <div className="pb-[86px] md:pb[98px] lg:pb[130px]"></div>
+
+      {/* PopupForm Modal */}
+      <AnimatePresence>
+        {showPopup && (
+          <motion.div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[100]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <PopupForm togglePopup={togglePopup} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

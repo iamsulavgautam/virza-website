@@ -3,8 +3,8 @@ import Image from "next/image";
 
 const footerLinks = [
   { href: "#", label: "Contact" },
-  { href: "#", label: "Privacy Policy" },
-  { href: "#", label: "Terms & Conditions" },
+  { href: "#", label: "info@virza.tech" },
+  { href: "#", label: "+977 9761780429" },
 ];
 
 export default function Footer() {
