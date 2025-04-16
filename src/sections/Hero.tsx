@@ -1,20 +1,21 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import Button from "@/components/button";
 import designExample1 from "@/assets/images/design-example-1.png";
 import designExample2 from "@/assets/images/design-example-2.png";
-import Image from "next/image";
+import cursorImage from "@/assets/images/cursor-you.svg";
 import Pointer from "@/components/Pointer";
 import { motion, useAnimate } from "framer-motion";
-import { useEffect } from "react";
-import cursorImage from "@/assets/images/cursor-you.svg";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Hero() {
   const [leftDesignScope, leftDesignAnimate] = useAnimate();
   const [leftPointerScope, leftPointerAnimate] = useAnimate();
-
   const [rightDesignScope, rightDesignAnimate] = useAnimate();
   const [rightPointerScope, rightPointerAnimate] = useAnimate();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     leftDesignAnimate([
@@ -52,16 +53,82 @@ export default function Hero() {
     ]);
   }, []);
 
+  const handleEmailSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const email = (form.elements.namedItem("email") as HTMLInputElement)?.value;
+
+    if (!email) {
+      toast.error("Please enter a valid email.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          access_key: process.env.NEXT_PUBLIC_FORM_KEY,
+          email,
+          subject: "Virza Newsletter",
+        }),
+      });
+
+      const result = await res.json();
+
+      if (result.success) {
+        toast.success("We've got your mail!");
+        form.reset();
+      } else {
+        toast.error("❌ Submission failed.");
+      }
+    } catch (err) {
+      toast.error("❌ Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       className="py-24 overflow-x-clip"
       id="#"
-      style={{
-        cursor: `url(${cursorImage.src}), auto`,
-      }}
+      style={{ cursor: `url(${cursorImage.src}), auto` }}
     >
+      {/* Toast container */}
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: "#111827", // deep dark
+            color: "#C4FF40", // neon-lime
+            borderRadius: "12px",
+            padding: "14px 16px",
+            fontSize: "15px",
+            fontWeight: 500,
+            border: "1px solid #2F2F2F",
+            boxShadow: "0 0 0 2px #1F1F1F",
+          },
+          success: {
+            iconTheme: {
+              primary: "#C4FF40",
+              secondary: "#111827",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#FF4D4F",
+              secondary: "#111827",
+            },
+          },
+        }}
+      />
+
       <div className="container relative">
-        {/* Left Design Image */}
+        {/* Left Design */}
         <motion.div
           ref={leftDesignScope}
           initial={{ opacity: 0, y: 100, x: -100 }}
@@ -84,10 +151,10 @@ export default function Hero() {
           <Pointer name="Rijan" />
         </motion.div>
 
-        {/* Right Design Image */}
+        {/* Right Design */}
         <motion.div
-          initial={{ opacity: 0, y: 100, x: 100 }}
           ref={rightDesignScope}
+          initial={{ opacity: 0, y: 100, x: 100 }}
           className="absolute -right-64 -top-16 hidden lg:block"
           drag
         >
@@ -114,7 +181,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Headline */}
+        {/* Heading */}
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-center leading-tight tracking-tight text-white">
           Build with clarity. <br className="hidden md:block" /> Design with
           impact.
@@ -126,10 +193,14 @@ export default function Hero() {
           Smart tools, seamless experience, stunning results.
         </p>
 
-        {/* CTA */}
-        <form className="mx-auto flex border border-white/20 bg-white/5 rounded-full p-2 mt-10 max-w-lg backdrop-blur-md">
+        {/* Form */}
+        <form
+          onSubmit={handleEmailSubmit}
+          className="mx-auto flex border border-white/20 bg-white/5 rounded-full p-2 mt-10 max-w-lg backdrop-blur-md"
+        >
           <input
             type="email"
+            name="email"
             placeholder="Enter your email to connect"
             className="bg-transparent px-4 flex-1 w-full text-white placeholder-white/40 outline-none"
           />
@@ -138,8 +209,9 @@ export default function Hero() {
             className="whitespace-nowrap"
             type="submit"
             variant="primary"
+            disabled={loading}
           >
-            Connect
+            {loading ? "Connecting..." : "Connect"}
           </Button>
         </form>
       </div>
