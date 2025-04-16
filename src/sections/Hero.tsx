@@ -148,7 +148,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 100, x: -200 }}
           className="absolute top-96 left-56 hidden lg:block"
         >
-          <Pointer name="Sulav" />
+          <Pointer name="" />
         </motion.div>
 
         {/* Right Design */}
