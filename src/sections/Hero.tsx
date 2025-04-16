@@ -135,11 +135,11 @@ export default function Hero() {
           className="absolute -left-32 top-16 hidden lg:block"
           drag
         >
-          <Image
+          {/* <Image
             draggable={false}
-            src={designExample1}
+            src={designExample2}
             alt="design example 1"
-          />
+          /> */}
         </motion.div>
 
         {/* Left Pointer */}
@@ -148,7 +148,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 100, x: -200 }}
           className="absolute top-96 left-56 hidden lg:block"
         >
-          <Pointer name="Rijan" />
+          <Pointer name="Sulav" />
         </motion.div>
 
         {/* Right Design */}
