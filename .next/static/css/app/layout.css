@@ -667,6 +667,9 @@ video {
 .z-50 {
   z-index: 50;
 }
+.m-0 {
+  margin: 0px;
+}
 .m-auto {
   margin: auto;
 }
@@ -816,6 +819,9 @@ video {
 .flex-wrap {
   flex-wrap: wrap;
 }
+.items-start {
+  align-items: flex-start;
+}
 .items-center {
   align-items: center;
 }
@@ -824,6 +830,9 @@ video {
 }
 .justify-center {
   justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
 }
 .gap-16 {
   gap: 4rem;
@@ -1140,6 +1149,9 @@ video {
 }
 .delay-300 {
   transition-delay: 300ms;
+}
+.duration-300 {
+  transition-duration: 300ms;
 }
 .duration-500 {
   transition-duration: 500ms;
