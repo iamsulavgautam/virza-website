@@ -55,11 +55,13 @@ export default function Hero() {
   return (
     <section
       className="py-24 overflow-x-clip"
+      id="#"
       style={{
         cursor: `url(${cursorImage.src}), auto`,
       }}
     >
-      <div className="container relative ">
+      <div className="container relative">
+        {/* Left Design Image */}
         <motion.div
           ref={leftDesignScope}
           initial={{ opacity: 0, y: 100, x: -100 }}
@@ -72,14 +74,17 @@ export default function Hero() {
             alt="design example 1"
           />
         </motion.div>
+
+        {/* Left Pointer */}
         <motion.div
           ref={leftPointerScope}
           initial={{ opacity: 0, y: 100, x: -200 }}
           className="absolute top-96 left-56 hidden lg:block"
         >
-          <Pointer name="Andrea" />
+          <Pointer name="Rijan" />
         </motion.div>
 
+        {/* Right Design Image */}
         <motion.div
           initial={{ opacity: 0, y: 100, x: 100 }}
           ref={rightDesignScope}
@@ -92,31 +97,41 @@ export default function Hero() {
             alt="design example 2"
           />
         </motion.div>
+
+        {/* Right Pointer */}
         <motion.div
           ref={rightPointerScope}
           initial={{ opacity: 0, x: 275, y: 100 }}
           className="absolute -top-4 right-80 hidden lg:block"
         >
-          <Pointer color="red" name="Brew" />
+          <Pointer color="red" name="Sulav" />
         </motion.div>
 
-        <div className="flex justify-center">
-          <div className="inline-flex py-1 px-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full text-neutral-950 font-semibold">
-            ✨ $7.5M eed round raised
+        {/* Badge */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex py-1 px-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full text-neutral-950 font-semibold text-sm shadow-md">
+            ✨ Your Digital Buddy
           </div>
         </div>
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-medium text-center mt-6 ">
-          Impactful design, created effortlessly
+
+        {/* Headline */}
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-center leading-tight tracking-tight text-white">
+          Build with clarity. <br className="hidden md:block" /> Design with
+          impact.
         </h1>
-        <p className="text-center text-xl text-white/50 mt-8 max-w-2xl mx-auto">
-          Design tool shouldn't slow you down. Create, prototype, and test with
-          ease.
+
+        {/* Subheading */}
+        <p className="text-center text-lg md:text-xl text-white/60 mt-6 max-w-2xl mx-auto">
+          Virza empowers you to go from idea to execution—without the chaos.
+          Smart tools, seamless experience, stunning results.
         </p>
-        <form className="mx-auto flex border border-white/50 rounded-full p-2 mt-8 max-w-lg">
+
+        {/* CTA */}
+        <form className="mx-auto flex border border-white/20 bg-white/5 rounded-full p-2 mt-10 max-w-lg backdrop-blur-md">
           <input
             type="email"
-            placeholder="Enter your email"
-            className="bg-transparent px-4 flex-1 w-full"
+            placeholder="Enter your email to connect"
+            className="bg-transparent px-4 flex-1 w-full text-white placeholder-white/40 outline-none"
           />
           <Button
             size="sm"
